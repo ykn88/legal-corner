@@ -1,0 +1,120 @@
+.wrapper{
+    width: 100vw;
+    // margin: 20px auto;
+    margin-left: -1rem;
+}
+.nav{
+    position: absolute;
+    // background-color: #262262;
+    background: transparent;
+    font-size: 16px;
+    z-index: 2;
+}
+.nav > ul{
+    position: relative;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: flex-start;
+    width: 100vw;
+    margin: 0 auto;
+    padding: 0;
+}
+.nav a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+
+.nav ul li{
+    color: white;
+    list-style: none;
+    transition: 0.5s;
+}
+
+ul .img{
+    width: 85%;
+}
+
+.nav > ul > li > a{
+    padding: 15px 25px;
+}
+
+.nav ul>li.dropdown{
+    position: relative;
+    float: right;
+    content: '';
+    margin-left: 10px;
+    margin-top: 8px;
+}
+
+.nav > ul >li >a:hover{
+    // background: #668fc5;
+    color: red;
+}
+// .nav > ul >li:hover{
+//     // background: #668fc5;
+//     background: transparent;
+// }
+
+.nav ul.menuArea{
+    padding: 40px 40px 0 40px;
+    background:  #003089;
+    text-align: left;
+    border-top: 5px solid #164c82;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.6);
+    z-index: 3;
+    position: absolute;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 60vw;
+    top: -9999px;
+    left: 0;
+    margin-top: .2rem;
+}
+
+.nav ul li:hover ul.menuArea{
+    top: 100%;
+}
+.hover:hover{
+        background-color: #003089;
+        padding: .5rem 1rem;
+    
+}
+.nav ul.menuArea ul{
+    width: 15%;
+    margin-bottom: 40px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav ul.menuArea h4{
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    
+}
+.nav ul.menuArea ul li{
+    display: block;
+}
+
+.nav ul.menuArea ul li a{
+    margin-top: 10px;
+    color: #fff;
+    text-transform: none;
+}
+.nav ul.menuArea ul li a:hover{
+    margin-top: 10px;
+    color: blue;
+    text-transform: none;
+}

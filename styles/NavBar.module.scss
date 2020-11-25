@@ -1,0 +1,215 @@
+.compNav{
+    padding: 1rem 7rem;
+    background-color: #1d2e4e;
+    color: white;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+    
+
+    
+    .compNav1{
+        display: flex;
+        justify-content: space-between;
+
+        h1{
+            font-weight: 400;
+            font-size: 2.5rem;
+        }
+
+        p{
+            text-align: center;
+        }
+        span{
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    }
+    .compNav2{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+
+        .item1{
+
+            ul{
+                display: flex;
+                gap: 1rem;
+                list-style-type: none;
+            }
+            
+        }
+
+        .item2{
+            button{
+                width: 10rem;
+                height: 2.8rem;
+                background-color: #DF2938;
+                color: #1d2e4e;
+                font-weight: 600;
+                cursor: pointer;
+                font-size: 1rem;
+                border: none;
+                outline: none;
+                // z-index: 7;
+            }
+            button:hover{
+                background-color: white;
+                // color: wheat;
+            }
+        }
+    }
+}
+
+.mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    .compNavs{
+        display: none;
+    }
+   
+    .mobile{
+        display: contents;
+   
+        $bg: #1d2e4e;
+        $bg-accent: #484a4d;
+        $text-color: #dadce1;
+        $nav-size: 60px;
+        $border: 1px solid #474a4d;
+        $border-radius: 8px;
+        $speed:500ms;
+        $button-size:30px;
+    
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    a{
+        color: $text-color;
+        text-decoration: none;
+    }
+
+    .navbar{
+        height: $nav-size;
+        background-color: $bg;
+        padding: 0 1rem;
+        border-bottom: $border;
+        position: fixed;
+        top: 0;
+        z-index: 5;
+        width: 100vw;
+    }
+    .head{
+        color: $text-color;
+        font-weight: 400;
+    }
+    .headstrong{
+        font-weight: 700;
+    }
+
+    .navbarNav{
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // justify-content: flex-end;
+    }
+
+    .navItem{
+        width: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .iconButton{
+        width: $button-size;
+        height: $button-size;
+        // background-color: #484a4d;
+        background-color: transparent;
+        border-radius: 50%;
+        padding: 5px;
+        margin: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 300ms;
+    }
+    .iconButton:hover{
+        filter: brightness(1.2);
+    }
+
+.dropdownMenu{
+    position: absolute;
+    top: 58px;
+    width: 300px;
+    transform: translateX(-45%);
+    background-color: $bg;
+    border: $border;
+    border-radius: $border-radius;
+    padding: 1rem;
+    overflow: hidden;
+    z-index: 10;
+
+    // transition: height $speed ease;
+
+}    
+
+.menuItem{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: $border-radius;
+    transition: background $speed;
+    padding: 0.5rem;
+}
+.menuItem:hover{
+    background-color: #525357;
+}
+.iconRight{
+    margin-left: auto;
+}
+.menu{
+    width: 100%;
+}
+.menuPrimary-enter{
+    position: absolute;
+    transform: translateX(-110%);
+
+}
+.menuPrimary-enter-active{
+    transform: translateX(0%);
+    transition: all $speed ease;
+}
+.menuPrimary-exit{
+    position: absolute;
+
+}
+.menuPrimary-exit-active{
+    transform: translateX(-110%);
+    transition: all $speed ease;
+}
+.menuSecondary-enter{
+    position: absolute;
+    transform: translateX(110%);
+
+}
+.menuSecondary-enter-active{
+    transform: translateX(0%);
+    transition: all $speed ease;
+}
+.menuSecondary-exit{
+    position: absolute;
+
+}
+.menuSecondary-exit-active{
+    transform: translateX(110%);
+    transition: all $speed ease;
+}
+}
+    
+}

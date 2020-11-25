@@ -1,0 +1,49 @@
+.head{
+    width: 90%;
+    margin: auto;
+    height: 10vh;
+    background-color: #DF2938;
+
+
+    .item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 10vh;
+        margin: 0 2rem;
+        h2{
+            color: white;
+
+            a{
+                border-bottom: 2px solid white;
+            }
+        }
+        
+    }
+}
+
+.mainDiv{
+    background-color: #003089;
+    width: 90%;
+    margin: auto;
+    border-radius: 20px;
+    
+
+    .items{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 2rem;
+        height: 6vh;
+        margin-top: 1rem;
+        h3{
+            color: white;
+        }
+        p{
+            font-size: 1.3rem;
+            color: #DF2938;
+            font-weight: 800;
+            cursor: pointer;
+        }
+    }
+}

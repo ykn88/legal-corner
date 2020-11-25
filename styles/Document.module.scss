@@ -1,0 +1,136 @@
+.intro{
+    margin-top: 2rem;
+    .introMain{
+        width: 75%;
+        margin: auto;
+        .heading{
+            h3{
+                margin-bottom: 1rem;
+                color: #003089;
+                font-weight: 400;
+                font-size: 1.2rem;
+            }
+        }
+        .headings{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h2{
+                color: #003089;
+                font-weight: 700;
+                font-size: 2rem;
+    
+            }
+            p{
+    cursor: pointer;
+            }
+        }
+    }
+    .container{
+        width: 75%;
+        margin: auto;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        .containt{
+            background-color:#E8F0FF;
+            width: 22vw;
+            height: 18vh;
+            margin: 1rem 0;
+
+            .num{
+                display: flex;
+                gap: 0rem;
+                align-items: center;
+
+                .numP{
+                    background-color: #003089;
+                    padding: .5rem .6rem;
+                    margin: .5rem .5rem;
+                    color: white;
+                }
+                h3{
+                    font-size: 1.5rem;
+                }
+            }
+            .para{
+                p{
+                    padding: .2rem .3rem;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .intro{
+        margin-top: 2rem;
+        .introMain{
+            width: 75%;
+            margin: auto;
+            .heading{
+                h3{
+                    margin-bottom: 1rem;
+                    color: #003089;
+                    font-weight: 400;
+                    font-size: 1.2rem;
+                }
+            }
+            .headings{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                h2{
+                    color: #003089;
+                    font-weight: 700;
+                    font-size: 2rem;
+        
+                }
+                p{
+        
+                }
+            }
+        }
+        .container{
+            width: 75%;
+            margin: auto;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-wrap: wrap;
+    
+            .containt{
+                background-color:#E8F0FF;
+                width: 105%;
+                height: 26vh;
+                margin: 1rem 0;
+    
+                .num{
+                    display: flex;
+                    gap: 0rem;
+                    align-items: center;
+    
+                    .numP{
+                        background-color: #003089;
+                        padding: .5rem .6rem;
+                        margin: .5rem .5rem;
+                        color: white;
+                    }
+                    h3{
+                        font-size: 1.5rem;
+                    }
+                }
+                .para{
+                    p{
+                        padding: .2rem .3rem;
+                    }
+                }
+            }
+        }
+    }
+    
+   
+  }

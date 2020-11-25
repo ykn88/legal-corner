@@ -1,0 +1,103 @@
+.intro{
+    margin-top: 2rem;
+    .introMain{
+        width: 75%;
+        margin: auto;
+        .heading{
+            h3{
+                margin-bottom: 1rem;
+                color: #003089;
+                font-weight: 400;
+                font-size: 1.2rem;
+            }
+        }
+        .headings{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h2{
+                color: #003089;
+                font-weight: 700;
+                font-size: 2rem;
+    
+            }
+            p{
+                cursor: pointer;
+    
+            }
+        }
+    }
+    .containt{
+        width: 75%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        gap: 1.5rem;
+
+        p{
+            flex: 3;
+
+        }
+        video{
+            flex: 2;
+            // width: 30vw;
+            height: 40vh;
+            cursor: pointer;
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .intro{
+        margin-top: 2rem;
+        .introMain{
+            width: 85%;
+            margin: auto;
+            .heading{
+                h3{
+                    margin-bottom: 1rem;
+                    color: #003089;
+                    font-weight: 400;
+                    font-size: 1.2rem;
+                }
+            }
+            .headings{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                h2{
+                    color: #003089;
+                    font-weight: 700;
+                    font-size: 2rem;
+        
+                }
+                p{
+        
+                }
+            }
+        }
+        .containt{
+            width: 85%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            gap: 1.5rem;
+    
+            p{
+                flex: 3;
+    
+            }
+            video{
+                flex: 2;
+                width: 94%;
+                height: 40vh;
+            }
+        }
+    }
+    
+}
