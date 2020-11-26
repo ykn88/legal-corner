@@ -3,19 +3,30 @@ import { Stack, Switch } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import baseUrl from '../../helpers/baseUrl'
 import styles from '../../styles/backend/Form.module.scss'
+import SelectDocument from './documents/selectDocument'
+import AddVideo from './product/AddVideo'
+import CreateProduct from './product/CreateProduct'
 
-const Form = ({category}) => {
+const Form = ({category, productHeader, product, documents}) => {
 
     const [cat, setCat] = useState('')
     const [subCat, setSubCat] = useState('')
     const [selectCat, setSelectCat] = useState(0)
     const [caltList, setCatList] = useState(category)
+    const [subCatList, setSubCatList] = useState(productHeader)
+    const [productList, setProductList] = useState(product)
 
     const updateCatList = (data) => {
         setCatList(prevState => [
             ...prevState, data
         ])
     }
+
+    const updateSubCatList = (data) => {
+        setSubCatList(prevState => [
+            ...prevState, data
+        ])
+    } 
     
     const postCat = async (e) => {
         e.preventDefault()
@@ -46,7 +57,6 @@ const Form = ({category}) => {
         if(subCat === '' || selectCat === 0)
            alert('fields missing')
         else {
-            console.log(typeof(selectCat) === 'number')
             const res = await fetch(`${baseUrl}/api/subCategory/createSubCategory`, {
                 method: 'POST',
                 headers: {
@@ -60,7 +70,7 @@ const Form = ({category}) => {
             const data = await res.json()
             setSubCat('')
             console.log(data)
-            // window.location.reload()
+            updateSubCatList(subCatList)
         }   
     }
 
@@ -113,102 +123,10 @@ const Form = ({category}) => {
                     </form>
                 </div>
             </div>
-           
-            <div className={styles.first}>
-                <div className={styles.head}>
-                    <h1>Hero Section</h1>
-                    <div className={styles.ebutton}>
-                    <p><EditIcon /></p>
-                    <p>Switch </p>
-                    </div>
-                </div>
-                <div className={styles.input}>
-                    <form>
-                        <div className={styles.input1}>
-                        <input className={styles.inp1} type="text" placeholder="legal Service Name" />
-                        <input className={styles.inp2} type="text"  placeholder="Service Fee" />
-                        </div>
-                        <div className={styles.input2}>
-                        <input className={styles.inp3} type="text"  placeholder="legal service Short Description" />
-                        </div>
-                        <div className={styles.button}>
-                            <button>Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div className={styles.first}>
-                <div className={styles.head}>
-                    <h1>Video & Description</h1>
-                    <div className={styles.ebutton}>
-                    <p><EditIcon /></p>
-                    <p>Switch</p>
-                    </div>
-                </div>
-                <div className={styles.input}>
-                    <form>
-                        <div className={styles.input1}>
-                        <input className={styles.inp4} type="text" placeholder="YouTube Video Link" />
-                        </div>
-                        <div className={styles.input2}>
-                        <input className={styles.inp3} type="text"  placeholder="legal service Description" />
-                        </div>
-                        <div className={styles.button}>
-                            <button>Save</button>
-                        </div>
-                    </form>
-                </div>
-                
-            </div>
-            <div className={styles.first}>
-                <div className={styles.head}>
-                    <h1>Document Requirment</h1>
-                    <div className={styles.ebutton}>
-                    <p>Switch</p>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                    <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                    <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div className={styles.input}>
-                    <form>
-                        <div className={styles.input1}>
-                        <input className={styles.inp4} type="text" placeholder="YouTube Video Link" />
-                        </div>
-                        <div className={styles.input2}>
-                        <input className={styles.inp5} type="text"  placeholder="legal service Description" />
-                        </div>
-                        <div className={styles.button}>
-                            <button>Save</button>
-                        </div>
-                    </form>
-                </div>
-                
-            </div>
+            <CreateProduct subCatList={subCatList} setProductList={setProductList}/>
+            <AddVideo productList={productList}/>
+            <SelectDocument documents={documents}/>
+            
             <div className={styles.first}>
                 <div className={styles.head}>
                     <h1>Involved Steps </h1>

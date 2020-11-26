@@ -5,7 +5,7 @@ import Header from '../components/backend/Header'
 import baseUrl from '../helpers/baseUrl'
 // import MyEditor from '../components/backend/MyEditor'
 
-const form = ({data}) => {
+const form = ({data, productHeader, product, documents}) => {
     return (
         <div>
             <Header />
@@ -14,7 +14,7 @@ const form = ({data}) => {
             <br />
             <br />
             <br />
-            <Form category={data}/>
+            <Form category={data} productHeader={productHeader} product={product} documents={documents}/>
             {/* <Editor /> */}
             {/* <MyEditor /> */}
         </div>
@@ -24,9 +24,15 @@ const form = ({data}) => {
 export async function getStaticProps() {
     const categories = await fetch(`${baseUrl}/api/category/getCategory`)
     const data = await categories.json()
+    const data2 = await fetch(`${baseUrl}/api/subCategory/getSubCategory`)
+    const productHeader = await data2.json()
+    const data3 = await fetch(`${baseUrl}/api/product/getProduct`)
+    const product = await data3.json()
+    const data4 = await fetch(`${baseUrl}/api/documents/getDocuments`)
+    const documents = await data4.json()
     return {
         props: {
-           data
+           data, productHeader, product, documents
         }
     }
 }

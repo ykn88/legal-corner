@@ -1,0 +1,69 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteField",
+      "model": "ProductProfile",
+      "field": "id"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ProductProfile",
+      "field": "headTitle",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ProductProfile",
+      "field": "headDesc",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ProductProfile",
+      "field": "bodyTitle",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ProductProfile",
+      "field": "bodyDesc",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ProductProfile",
+      "field": "product",
+      "arity": "Required"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "ProductProfile",
+      "field": "productId",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "ProductProfile"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "ProductProfile"
+        },
+        "directive": "id"
+      },
+      "argument": "",
+      "value": "[productId]"
+    }
+  ]
+}
