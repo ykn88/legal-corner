@@ -6,6 +6,9 @@ import styles from '../../styles/backend/Form.module.scss'
 import SelectDocument from './documents/selectDocument'
 import AddVideo from './product/AddVideo'
 import CreateProduct from './product/CreateProduct'
+import Faq from './product/Faq'
+import Header from './product/Header'
+import InvolvedSteps from './product/InvolvedSteps'
 
 const Form = ({category, productHeader, product, documents}) => {
 
@@ -26,6 +29,7 @@ const Form = ({category, productHeader, product, documents}) => {
         setSubCatList(prevState => [
             ...prevState, data
         ])
+        console.log(subCatList)
     } 
     
     const postCat = async (e) => {
@@ -68,9 +72,9 @@ const Form = ({category, productHeader, product, documents}) => {
                 })
             })
             const data = await res.json()
+            updateSubCatList(data)
             setSubCat('')
             console.log(data)
-            updateSubCatList(subCatList)
         }   
     }
 
@@ -113,7 +117,7 @@ const Form = ({category, productHeader, product, documents}) => {
                         <select onChange = {(e) => setSelectCat(parseInt(e.target.value))}>
                             <option value='0'>Select a category</option>
                             {caltList.map(data => (
-                                <option key = {data.id} value = {data.id}>{data.name}</option>
+                                <option key = {data?.id} value = {data?.id}>{data?.name}</option>
                             ))}
                         </select>
                         
@@ -124,106 +128,12 @@ const Form = ({category, productHeader, product, documents}) => {
                 </div>
             </div>
             <CreateProduct subCatList={subCatList} setProductList={setProductList}/>
+            <Header productList={productList}/>
             <AddVideo productList={productList}/>
-            <SelectDocument documents={documents}/>
+            <SelectDocument documents={documents} productList={productList}/>
+            <InvolvedSteps productList={productList}/>
+            <Faq productList={productList}/>
             
-            <div className={styles.first}>
-                <div className={styles.head}>
-                    <h1>Involved Steps </h1>
-                    <div className={styles.ebutton}>
-                    <p>Switch</p>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                    <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                    <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div className={styles.input}>
-                    <form>
-                        <div className={styles.input1}>
-                        <input className={styles.inp50} type="text" placeholder="From Day" />
-                        <input className={styles.inp50} type="text" placeholder="To Day" />
-                        </div>
-                        <div className={styles.input2}>
-                        <input className={styles.inp3} type="text"  placeholder="legal service Description" />
-                        </div>
-                        <div className={styles.button}>
-                            <button>Save</button>
-                        </div>
-                    </form>
-                </div>
-                
-            </div>
-            <div className={styles.first}>
-                <div className={styles.head}>
-                    <h1>FAQ'S </h1>
-                    <div className={styles.ebutton}>
-                    <p>Switch</p>
-                    </div>
-                </div>
-                <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                    <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                    <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div className={styles.input}>
-                    <form>
-                        <div className={styles.input1}>
-                        <input className={styles.inp4} type="text" placeholder="From Day" />
-                        </div>
-                        <div className={styles.input2}>
-                        <input className={styles.inp3} type="text"  placeholder="legal service Description" />
-                        </div>
-                        <div className={styles.button}>
-                            <button>Save</button>
-                        </div>
-                    </form>
-                </div>
-                
-            </div>
         </div>
     )
 }
