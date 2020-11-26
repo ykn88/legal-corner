@@ -3,12 +3,11 @@ import { EditIcon } from '@chakra-ui/icons'
 import React, { useState } from 'react'
 import RichEditorExample from '../../../helpers/index'
 
-
-const AddVideo = ({productList}) => {
+const Header = ({productList}) => {
     return (
         <div className={styles.first}>
                 <div className={styles.head}>
-                    <h1>Video & Description</h1>
+                    <h1>Header and Description</h1>
                     <div className={styles.ebutton}>
                         <p><EditIcon /></p>
                         <p>Switch</p>
@@ -17,7 +16,7 @@ const AddVideo = ({productList}) => {
                 <div className={styles.input}>
                     <form>
                         <div className={styles.input1}>
-                            <input className={styles.inp4} type="text" placeholder="YouTube Video Link" />
+                            <input className={styles.inp4} type="text" placeholder="Header Title" />
                         </div>
                         <select>
                             <option value = '0'>Select a product</option>
@@ -37,4 +36,4 @@ const AddVideo = ({productList}) => {
     )
 }
 
-export default AddVideo
+export default Header

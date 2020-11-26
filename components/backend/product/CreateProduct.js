@@ -63,12 +63,10 @@ const CreateProduct = ({subCatList, setProductList}) => {
                 <select onChange = {(e) => setSelectSubCat(parseInt(e.target.value))}>
                     <option value='0'>Select Sub Category</option>
                     {subCatList.map(list => (
-                        <option key = {list.id} value = {list.id}>{list.name}</option>
+                        <option key = {list?.id} value = {list?.id}>{list?.name}</option>
                     ))}
                 </select>
-                {/* <div className={styles.input2}>
-                <input className={styles.inp3} type="text"  placeholder="legal service Short Description" />
-                </div> */}
+                
                 <div className={styles.button}>
                     <button onClick = {postProduct}>Save</button>
                 </div>
