@@ -5,6 +5,7 @@ import baseUrl from '../../helpers/baseUrl'
 import styles from '../../styles/backend/Form.module.scss'
 import SelectDocument from './documents/selectDocument'
 import AddVideo from './product/AddVideo'
+import Body from './product/Body'
 import CreateProduct from './product/CreateProduct'
 import Faq from './product/Faq'
 import Header from './product/Header'
@@ -129,6 +130,7 @@ const Form = ({category, productHeader, product, documents}) => {
             </div>
             <CreateProduct subCatList={subCatList} setProductList={setProductList}/>
             <Header productList={productList}/>
+            <Body productList={productList}/>
             <AddVideo productList={productList}/>
             <SelectDocument documents={documents} productList={productList}/>
             <InvolvedSteps productList={productList}/>
