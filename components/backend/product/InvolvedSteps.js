@@ -2,8 +2,54 @@ import styles from '../../../styles/backend/Form.module.scss'
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import React, { useState } from 'react'
 import RichEditorExample from '../../../helpers/index'
+import dynamic from 'next/dynamic'
+import baseUrl from '../../../helpers/baseUrl'
 
 const InvolvedSteps = ({productList}) => {
+
+    const [to, setTo] = useState('')
+    const [from, setFrom] = useState('')
+    const [id, setId] = useState('')
+
+    if(typeof window!== undefined) {
+        import('../../../helpers/index')
+    }
+
+    const Check = dynamic(() => 
+        {return import('../../../helpers/index')},
+        {ssr: false}
+    )
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        let body = ''
+        let value
+        if(to === '' || id === 0 || from === '')
+            console.log('Please add all fields')
+        else {
+            if(typeof window !== "undefined"){
+                value = JSON.parse(window.localStorage.getItem('value'))
+                value.blocks.forEach(block => body += block.text)   
+            }
+            const res = await fetch(`${baseUrl}/api/steps/addSteps`, {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    id,
+                    to,
+                    body,
+                    from
+                })
+            })
+            const data = await res.json()
+            console.log(data)
+            setTo('')
+            setFrom('')
+        }   
+    }
+
     return (
         <div className={styles.first}>
             <div className={styles.head}>
@@ -38,7 +84,7 @@ const InvolvedSteps = ({productList}) => {
                 </div>
             </div>
             <div className={styles.input}>
-                <select onChange = {(e) => handleChange(e)}>
+                <select onChange = {(e) => setId(parseInt(e.target.value))}>
                     <option value = '0'>Select Product</option>
                     {productList.map(list => (
                         <option key={list.id} value={list.id}>{list.name}</option>
@@ -48,14 +94,14 @@ const InvolvedSteps = ({productList}) => {
             <div className={styles.input}>    
                 <form>
                     <div className={styles.input1}>
-                        <input className={styles.inp50} type="text" placeholder="From Day" />
-                        <input className={styles.inp50} type="text" placeholder="To Day" />
+                        <input className={styles.inp50} type="text" placeholder="From Day" onChange = {(e) => setTo(e.target.value)}/>
+                        <input className={styles.inp50} type="text" placeholder="To Day" onChange = {(e) => setFrom(e.target.value)}/>
                     </div>
                     <div className={styles.input2}>
-                        <RichEditorExample />
+                        <Check />
                     </div>
                     <div className={styles.button}>
-                        <button>Save</button>
+                        <button onClick = {handleSubmit}>Save</button>
                     </div>
                 </form>
             </div>

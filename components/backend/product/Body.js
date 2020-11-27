@@ -5,8 +5,7 @@ import RichEditorExample from '../../../helpers/index'
 import dynamic from 'next/dynamic'
 import baseUrl from '../../../helpers/baseUrl'
 
-
-const Header = ({productList}) => {
+const Body = ({productList}) => {
 
     const [title, setTitle] = useState('')
     const [id, setId] = useState(0)
@@ -31,7 +30,7 @@ const Header = ({productList}) => {
                 value = JSON.parse(window.localStorage.getItem('value'))
                 value.blocks.forEach(block => body += block.text)   
             }
-            const res = await fetch(`${baseUrl}/api/product/addHeader`, {
+            const res = await fetch(`${baseUrl}/api/product/addBody`, {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -42,8 +41,8 @@ const Header = ({productList}) => {
                     body
                 })
             })
-            
-            console.log(res)
+            const data = await res.json()
+            console.log(data)
             setTitle('')
         }   
     }
@@ -51,7 +50,7 @@ const Header = ({productList}) => {
     return (
         <div className={styles.first}>
             <div className={styles.head}>
-                <h1>Header and Description</h1>
+                <h1>Body and Description</h1>
                 <div className={styles.ebutton}>
                     <p><EditIcon /></p>
                     <p>Switch</p>
@@ -60,7 +59,7 @@ const Header = ({productList}) => {
             <div className={styles.input}>
                 <form>
                     <div className={styles.input1}>
-                        <input onChange = {(e) => setTitle(e.target.value)} className={styles.inp4} type="text" placeholder="Header Title" />
+                        <input onChange = {(e) => setTitle(e.target.value)} className={styles.inp4} type="text" placeholder="Body Title" />
                     </div>
                     <select onChange = {(e) => setId(parseInt(e.target.value))}>
                         <option value = '0'>Select a product</option>
@@ -82,4 +81,4 @@ const Header = ({productList}) => {
     )
 }
 
-export default Header
+export default Body

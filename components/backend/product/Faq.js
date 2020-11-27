@@ -2,8 +2,52 @@ import styles from '../../../styles/backend/Form.module.scss'
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import React, { useState } from 'react'
 import RichEditorExample from '../../../helpers/index'
+import dynamic from 'next/dynamic'
+import baseUrl from '../../../helpers/baseUrl'
+
 
 const Faq = ({productList}) => {
+
+    if(typeof window!== undefined) {
+        import('../../../helpers/index')
+    }
+
+    const Check = dynamic(() => 
+        {return import('../../../helpers/index')},
+        {ssr: false}
+    )
+
+    const [id, setId] = useState(0)
+    const [question, setQuestion] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        let body = ''
+        let value
+        if(question === '' || id === 0)
+            console.log('Please add all fields')
+        else {
+            if(typeof window !== "undefined"){
+                value = JSON.parse(window.localStorage.getItem('value'))
+                value.blocks.forEach(block => body += block.text)   
+            }
+            const res = await fetch(`${baseUrl}/api/faq/createFaq`, {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    id,
+                    body,
+                    question
+                })
+            })
+            const data = await res.json()
+            console.log(data)
+            setQuestion('')
+        }   
+    }
+
     return (
         <div className={styles.first}>
             <div className={styles.head}>
@@ -40,7 +84,7 @@ const Faq = ({productList}) => {
             <div className={styles.input}>
                 <form>
                     <div className={styles.input1}>
-                        <select>
+                        <select onChange = {(e) => setId(parseInt(e.target.value))}>
                             <option value = '0'>Select Product</option>
                             {productList.map(list => (
                                 <option key={list.id} value={list.id}>{list.name}</option>
@@ -48,13 +92,13 @@ const Faq = ({productList}) => {
                         </select>
                     </div>
                     <div className={styles.input1}>
-                        <input className={styles.inp4} type="text" placeholder="Question" />
+                        <input className={styles.inp4} type="text" placeholder="Question" onChange = {(e) => setQuestion(e.target.value)} />
                     </div>
                     <div className={styles.input2}>
-                        <RichEditorExample /> 
+                        <Check />
                     </div>
                     <div className={styles.button}>
-                        <button>Save</button>
+                        <button onClick = {handleSubmit}>Save</button>
                     </div>
                 </form>
             </div>

@@ -1,16 +1,18 @@
 import React from 'react';
-import {Editor, EditorState, RichUtils, getDefaultKeyBinding} from 'draft-js';
+import {Editor, EditorState, RichUtils, getDefaultKeyBinding, convertToRaw} from 'draft-js';
+import { useContext } from 'react';
+import { EditorContext } from '../context/EditorContext';
+import dynamic from 'next/dynamic';
+
 
 const {useState, useRef, useCallback} = React;
 
 function RichEditorExample(props) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const editor = useRef(null);
-
   const focus = () => {
     if (editor.current) editor.current.focus();
   };
-
   const handleKeyCommand = useCallback(
     (command, editorState) => {
       const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -56,7 +58,11 @@ function RichEditorExample(props) {
       className += ' RichEditor-hidePlaceholder';
     }
   }
-
+  console.log('content state', convertToRaw(editorState.getCurrentContent()))
+  const value = convertToRaw(editorState.getCurrentContent())
+  if(typeof window !== "undefined"  )
+    window.localStorage.setItem('value', JSON.stringify(value))
+  
   return (
     <div className="RichEditor-root">
       <BlockStyleControls
@@ -84,7 +90,7 @@ function RichEditorExample(props) {
           handleKeyCommand={handleKeyCommand}
           keyBindingFn={mapKeyToEditorCommand}
           onChange={setEditorState}
-          placeholder="Tell a story..."
+          placeholder="Description here..."
           ref={editor}
           spellCheck={true}
         />
@@ -189,4 +195,4 @@ function InlineStyleControls({editorState, onToggle}) {
   );
 }
 
-export default RichEditorExample;
+export default RichEditorExample ;
