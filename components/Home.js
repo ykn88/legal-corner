@@ -3,10 +3,18 @@ import styles from '../styles/HomePage.module.scss'
 import {useSession, signOut, signIn, getCsrfToken, getSession, signin, signout} from 'next-auth/client'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import baseUrl from '../helpers/baseUrl'
+import {parseCookies} from 'nookies'
+import cookie from 'js-cookie'
+import jwt from 'jsonwebtoken'
 
-
-const Home = () => {
+const Home = ({userData}) => {
+    console.log(userData)
+    const [userMail, setUserMail] = useState('')
+    const [userPassword, setUserPassword] = useState('')
     const [token, setToken] = useState(null)
+    const [userInfo, setUserInfo] = useState(userData)
+  
     useEffect(() => {
       const loadData = async() => {
           setToken(await getSession())
@@ -20,7 +28,41 @@ const Home = () => {
         window.location.reload()
     }
 
-    console.log(token)
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        const res = await fetch(`${baseUrl}/api/login/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                email: userMail,
+                password: userPassword
+            })
+        })
+        const data = await res.json()
+        console.log(data.value)
+        cookie.set('token1', data.logCookie)
+        const value = {
+            email: data.value.email,
+            userId: data.value.id,
+            role: data.value.role,
+            name: data.value.name
+        }
+        console.log(value)
+        setUserInfo(value)
+    }
+
+    const handleLogOut = () => {
+        cookie.remove('token1')
+        const value = {
+            email: '',
+            userId: 0,
+            role: ''
+        }
+        setUserInfo(value)
+    }
+
     return (
         <div className={styles.mainDiv}>
             
@@ -78,6 +120,22 @@ const Home = () => {
                         <input type="text" placeholder="Business Name" />
                     </>
                 )}
+                    {userInfo?.role === '' ? (
+                        <> 
+                            <h4>Login</h4>
+                            <input value={userMail} type = "email" onChange = {(e) => setUserMail(e.target.value)}/>
+                            <input value={userPassword} type = "password" onChange = {(e) => setUserPassword(e.target.value)}/>
+                            <button onClick = {handleLogin}>Login</button>
+                        </>
+
+                    ) : (
+                        <>
+                            <button onClick = {handleLogOut}>Log Out</button>
+                        </>
+                    )
+                      
+                    }
+                
 
                 <div className={styles.formfooter}>
                 <div className={styles.formfooter1}>
