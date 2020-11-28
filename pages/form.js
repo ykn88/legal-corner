@@ -1,9 +1,11 @@
 import { useSession } from 'next-auth/client'
+import { parseCookies } from 'nookies'
 import React from 'react'
 // import Editor from '../components/backend/Editor'
 import Form from '../components/backend/Form'
 import Header from '../components/backend/Header'
 import baseUrl from '../helpers/baseUrl'
+import jwt from 'jsonwebtoken'
 // import MyEditor from '../components/backend/MyEditor'
 
 const form = ({data, productHeader, product, documents}) => {
@@ -22,7 +24,36 @@ const form = ({data, productHeader, product, documents}) => {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
+
+    const {token1} = parseCookies(ctx)
+
+    const userData = {
+        userId: 0,
+        email: '',
+        role: '',
+        name: ''
+    }
+
+    if(!token1) {
+        const {res} = ctx
+        res.writeHead(302, {Location: '/about'})
+        res.end()
+    } else {
+        const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
+        userData.email = email
+        userData.userId = userId,
+        userData.role = role,
+        userData.name = name
+        if(role === 'user'){
+            const {res} = ctx
+            res.writeHead(302, {Location: '/about'})
+            res.end()
+        }
+    }
+
+
+
     const categories = await fetch(`${baseUrl}/api/category/getCategory`)
     const data = await categories.json()
     const data2 = await fetch(`${baseUrl}/api/subCategory/getSubCategory`)

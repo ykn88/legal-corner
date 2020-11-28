@@ -9,12 +9,14 @@ import SliderBig from '../components/SliderBig'
 import NavBar from '../components/NavBar'
 import Nav from '../components/Nav'
 import useRole from '../hooks/useRole'
+import { parseCookies } from 'nookies'
+import jwt from 'jsonwebtoken'
 
-const about = () => {
+const about = ({userData}) => {
+    console.log(userData)
     let setUser
     const {user} = useRole()
     setUser = user
-    console.log(user?.role)
     return (
         <div>
 
@@ -26,7 +28,7 @@ const about = () => {
         <br />
         <br /> */}
         {/* <Nav /> */}
-            <Home />
+            <Home userData = {userData}/>
             <br />
             {/* <hr /> */}
             <Slider />
@@ -38,6 +40,31 @@ const about = () => {
             <SliderBig />
         </div>
     )
+}
+
+export async function getServerSideProps(ctx) {
+    const {token1} = parseCookies(ctx)
+    
+    const userData = {
+        userId: 0,
+        email: '',
+        role: '',
+        name: ''
+    }
+    if(token1) {
+        const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
+        userData.email = email
+        userData.userId = userId,
+        userData.role = role,
+        userData.name = name
+    }
+    
+    console.log(userData)
+    return {
+        props: {
+            userData
+        }
+    }
 }
 
 export default about
