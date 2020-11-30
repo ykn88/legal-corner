@@ -5,7 +5,8 @@ import {CSSTransition} from 'react-transition-group';
 import { ChevronDownIcon, ChevronLeftIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {useSession, signOut, signIn, getCsrfToken, getSession} from 'next-auth/client'
 
-const NavBar = () => {
+const NavBar = ({category}) => {
+    
 
     const [session] = useSession()
     
@@ -19,233 +20,33 @@ const NavBar = () => {
                 <p>FREE CONSULTATION <br /> <span>1800-103-252</span> </p>
                 </div>
                 <div className={styles.compNav2}>
+
                 <div className={styles2.wrapper}>
                     <nav className={styles2.nav}>
                     <div className={styles.item1 }>
                     <ul>
-                                     
-                    <li className={styles2.dropdown}>
-                    <a href='#' className={styles2.hover}>COMPANY</a>
-                    <ul className={styles2.menuArea}>
-                        <ul>
-                            <h4>Our Company</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
+                    {category.map(categorys=> (
+
+                        <li className={styles2.dropdown} key={categorys.id}>
+                    <a href='#' className={styles2.hover}>{categorys.name}</a>
+                    <ul className={styles2.menuArea} >
+                        {categorys.productHead.map(subcategory=>(
+                            <ul key={subcategory.id} >
+                            <h4>{subcategory.name}</h4>
+                            {subcategory.product.map(products =>(
+                                <li key={products.id}><a href='#'>{products.name}</a></li>
+                            ))}
                         </ul>
-                        <ul>
-                            <h4>Graphics Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Web Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>PhotoGraphy</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
+
+                        ))}
+                       
                     </ul>
                     </li>
+
+                    ) )} 
+                    
                   
-                    <li className={styles2.dropdown}>
-                    <a href='#' className={styles2.hover}>REGISTRATION</a>
-                    <ul className={styles2.menuArea}>
-                        <ul>
-                            <h4>Our Company</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Graphics Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Web Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>PhotoGraphy</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                    </ul>
-                    </li>
-                  
-                    <li className={styles2.dropdown}>
-                    <a href='#' className={styles2.hover}>TAXATION</a>
-                    <ul className={styles2.menuArea}>
-                        <ul>
-                            <h4>Our Company</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Graphics Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Web Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>PhotoGraphy</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                    </ul>
-                    </li>
-                  
-                    <li className={styles2.dropdown}>
-                    <a href='#' className={styles2.hover}>COMPLIENCE</a>
-                    <ul className={styles2.menuArea}>
-                        <ul>
-                            <h4>Our Company</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Graphics Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Web Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>PhotoGraphy</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                    </ul>
-                    </li>
-                  
-                    <li className={styles2.dropdown}>
-                    <a href='#' className={styles2.hover}>Service</a>
-                    <ul className={styles2.menuArea}>
-                        <ul>
-                            <h4>Our Company</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Graphics Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Web Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>PhotoGraphy</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                    </ul>
-                    </li>
-                  
-                  <li className={styles2.dropdown}>
-                    <a href='#' className={styles2.hover}>Service</a>
-                    <ul className={styles2.menuArea}>
-                        <ul>
-                            <h4>Our Company</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Graphics Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>Web Design</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                        <ul>
-                            <h4>PhotoGraphy</h4>
-                            <li><a href='#'>design 1</a></li>
-                            <li><a href='#'>design 2</a></li>
-                            <li><a href='#'>design 3</a></li>
-                            <li><a href='#'>design 4</a></li>
-                        </ul>
-                    </ul>
-                    </li>
-                  
+                    
                     </ul>
                     </div>
                     </nav>
