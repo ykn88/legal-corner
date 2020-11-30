@@ -92,7 +92,7 @@ const SelectDocument = ({documents, productList}) => {
                         <option key={list.id} value={list.id}>{list.name}</option>
                     ))}
                 </select>
-                <select onChange = {(e) => setDocs(parseInt(e.target.value))}>
+                <select onChange = {(e) => setDocs(parseInt(e.target.value))} style={{width:'100%'}}>
                     <option value='0'>Select Documnets</option>
                     {documents.map(list => (
                         <option key={list.id} value={list.id}>{list.name}</option>
