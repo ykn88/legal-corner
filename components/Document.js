@@ -3,6 +3,7 @@ import styles from '../styles/Document.module.scss'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const Document = ({singleProduct}) => {
+    singleProduct = {}
     return (
         <div className={styles.intro}>
         <div className={styles.introMain}>
@@ -15,14 +16,14 @@ const Document = ({singleProduct}) => {
             </div>
         </div>
         <div className={styles.container}>
-            {singleProduct.ptd.map(list => (
+            {singleProduct?.ptd?.map(list => (
                 <div className={styles.containt}>
                     <div className={styles.num}>
                         <p className={styles.numP}>1</p>
-                        <h3>{list.document?.name}</h3>
+                        <h3>{list?.document?.name}</h3>
                     </div>
                     <div className={styles.para}>
-                        <p>{list.document?.desc}</p>
+                        <p>{list?.document?.desc}</p>
                     </div>
                 </div>
             ))}

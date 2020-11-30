@@ -10,11 +10,7 @@ export default async function (req, res) {
         },
         include: {
             profile: true,
-            ptd: {
-                include: {
-                    document: true
-                }
-            },
+            document: true,
             faq: true
         }
     })

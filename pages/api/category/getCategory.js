@@ -7,18 +7,7 @@ export default async function(req, res) {
       include: {
          productHead: {
             include: {
-               product: {
-                  include: {
-                     profile: true,
-                     ptd: {
-                        include: {
-                           document: true
-                        }
-                     },
-                     faq: true,
-                     steps: true
-                  }
-               }
+               product: true
             }
          }
       }

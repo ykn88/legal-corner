@@ -6,75 +6,70 @@ import { ChevronDownIcon, ChevronLeftIcon, HamburgerIcon } from '@chakra-ui/icon
 import {useSession, signOut, signIn, getCsrfToken, getSession} from 'next-auth/client'
 
 const NavBar = ({category}) => {
-    
-
-    const [session] = useSession()
-    
+    category = []
     return (
         <div>
-            {/* computer view */}
-            <div className={styles.compNavs}>
-            <div className={styles.compNav}>
-                <div className={styles.compNav1} >
-                <h1>LEGAL <strong>CORNER</strong></h1>
-                <p>FREE CONSULTATION <br /> <span>1800-103-252</span> </p>
-                </div>
-                <div className={styles.compNav2}>
-
-                <div className={styles2.wrapper}>
-                    <nav className={styles2.nav}>
-                    <div className={styles.item1 }>
-                    <ul>
-                    {category.map(categorys=> (
-
-                        <li className={styles2.dropdown} key={categorys.id}>
-                    <a href='#' className={styles2.hover}>{categorys.name}</a>
-                    <ul className={styles2.menuArea} >
-                        {categorys.productHead.map(subcategory=>(
-                            <ul key={subcategory.id} >
-                            <h4>{subcategory.name}</h4>
-                            {subcategory.product.map(products =>(
-                                <li key={products.id}><a href='#'>{products.name}</a></li>
-                            ))}
-                        </ul>
-
-                        ))}
-                       
-                    </ul>
-                    </li>
-
-                    ) )} 
-                    
-                  
-                    
-                    </ul>
-                    </div>
-                    </nav>
-                    </div>
-                    <div className={styles.item2}>
-                    <button>Book a Service</button>
-                    </div>
-                </div>
-
-            </div>
-            <br /><br/>
-<br /><br/>
-<br /><br/>
- </div>
-            {/* mobile view */}
-            <div className={styles.mobile}>
-            
-            <Navbar>
-                <h1 className={styles.head}>LEGAL <strong className={styles.headstrong}>CORNER</strong></h1>
-                <NavItem icon="&#9776;" style={{fontSize:'2rem'}} >
-                    <DropdownMenu />
-                </NavItem>
-                
-            </Navbar>
-
-        <br />
-        <br />
-            </div>
+            {category.length ? 
+                (
+                    <>
+                        {/* computer view */}
+                        <div className={styles.compNavs}>
+                            <div className={styles.compNav}>
+                                <div className={styles.compNav1} >
+                                    <h1>LEGAL <strong>CORNER</strong></h1>
+                                    <p>FREE CONSULTATION <br /> <span>1800-103-252</span> </p>
+                                </div>
+                                <div className={styles.compNav2}>
+                                    <div className={styles2.wrapper}>
+                                        <nav className={styles2.nav}>
+                                            <div className={styles.item1 }>
+                                                <ul>
+                                                    {category.map(categorys=> (
+                                                        <li className={styles2.dropdown} key={categorys?.id}>
+                                                            <a href='#' className={styles2.hover}>{categorys?.name}</a>
+                                                            <ul className={styles2.menuArea} >
+                                                                {categorys?.productHead?.map(subcategory=>(
+                                                                    <ul key={subcategory?.id} >
+                                                                        <h4>{subcategory?.name}</h4>
+                                                                        {subcategory?.product.map(products =>(
+                                                                        <li key={products?.id}><a href={products?.id}>{products?.name}</a></li>
+                                                                        ))}
+                                                                    </ul>
+                                                                ))}
+                                                            </ul>
+                                                        </li>
+                                                    ))} 
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    <div className={styles.item2}>
+                                    <button>Book a Service</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <br /><br/>
+                            <br /><br/>
+                            <br /><br/>
+                        </div>
+                        {/* mobile view */}
+                        <div className={styles.mobile}>
+                            <Navbar>
+                                <h1 className={styles.head}>LEGAL <strong className={styles.headstrong}>CORNER</strong></h1>
+                                <NavItem icon="&#9776;" style={{fontSize:'2rem'}} >
+                                    <DropdownMenu />
+                                </NavItem>
+                            </Navbar>
+                            <br />
+                            <br />
+                        </div>
+                    </>
+                ) 
+            : 
+                (<div>
+                    Loading.....
+                </div>)
+            }
         </div>
     )
 }

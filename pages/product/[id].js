@@ -13,63 +13,48 @@ import { parseCookies } from 'nookies'
 import jwt from 'jsonwebtoken'
 import baseUrl from '../../helpers/baseUrl'
 
-const about = ({userData , category, singleProduct}) => {
-    let setUser
-    const {user} = useRole()
-    setUser = user
+const product = () => {
     return (
         <div>
-
-        <NavBar category = {category} />
-        {/* <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br /> */}
-        {/* <Nav /> */}
-            <Home userData = {userData} singleProduct={singleProduct}/>
+            {/* <Nav /> */}
+            {/* <Home userData = {userData} singleProduct={singleProduct}/> */}
             <br />
             {/* <hr /> */}
-            <Slider />
+            {/* <Slider /> */}
             {/* <hr /> */}
-            <Intro singleProduct={singleProduct}/>
-            <Document singleProduct = {singleProduct}/>
-            <About singleProduct = {singleProduct}/>
+            {/* <Intro singleProduct={singleProduct}/> */}
+            {/* <Document singleProduct = {singleProduct}/> */}
+            {/* <About singleProduct = {singleProduct}/> */}
             {/* <SliderTwo /> */}
-            <SliderBig singleProduct = {singleProduct}/>
+            {/* <SliderBig singleProduct = {singleProduct}/> */}
         </div>
     )
 }
 
-export async function getServerSideProps(ctx) {
-    const {token1} = parseCookies(ctx)
+// export async function getServerSideProps(ctx) {
+//     const {token1} = parseCookies(ctx)
     
-    const userData = {
-        userId: 0,
-        email: '',
-        role: '',
-        name: ''
-    }
-    console.log('id: ',ctx.params.id)
-    const pid = parseInt(ctx.params.id)
-    if(token1) {
-        const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
-        userData.email = email
-        userData.userId = userId,
-        userData.role = role,
-        userData.name = name
-    }
+//     const userData = {
+//         userId: 0,
+//         email: '',
+//         role: '',
+//         name: ''
+//     }
+//     const pid = parseInt(ctx.params.id)
+//     if(token1) {
+//         const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
+//         userData.email = email
+//         userData.userId = userId,
+//         userData.role = role,
+//         userData.name = name
+//     }
+//     const singleProduct = await (await fetch(`${baseUrl}/api/product/${pid}`)).json()
+//     console.log(singleProduct)
+//     return {
+//         props: {
+//             singleProduct
+//         }
+//     }
+// }
 
-    const calye = await fetch(`${baseUrl}/api/category/getCategory`)
-    const category = await calye.json()
-    const singleProduct = await (await fetch(`${baseUrl}/api/product/${pid}`)).json()
-    console.log(singleProduct)
-    return {
-        props: {
-            userData, category, singleProduct
-        }
-    }
-}
-
-export default about
+export default product

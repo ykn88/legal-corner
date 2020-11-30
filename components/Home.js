@@ -9,11 +9,11 @@ import cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 
 const Home = ({userData, singleProduct}) => {
-    console.log(singleProduct)
+    singleProduct = {}
     const [userMail, setUserMail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const [token, setToken] = useState(null)
-    const [userInfo, setUserInfo] = useState(userData)
+    const [userInfo, setUserInfo] = useState(userData || {})
   
     useEffect(() => {
       const loadData = async() => {
@@ -64,95 +64,96 @@ const Home = ({userData, singleProduct}) => {
     }
 
     return (
-        <div className={styles.mainDiv}>
-            
-            <div className={styles.rectangle}>
-            <div className={styles.formClass}>
-            <div className={styles.items}>
-            <h1>{singleProduct.profile?.headTitle} <br /> Registration in Delhi</h1>
-            <p>{singleProduct.profile?.headDesc}</p>
-            <div className={styles.saq}>
-                <div className={styles.saq1}>
-                <div className={styles.image}>
-                <img src="https://static.thenounproject.com/png/407855-200.png" alt="missing" />
-                </div>
-                <div className={styles.heads}>
-                <h1 className={styles.head}>300+</h1>
-                <p className={styles.head1}>Happy Customers</p>
-                </div>
+        <>
+            {singleProduct.length? (
 
-                </div>
-                <div className={styles.saq1}>
-                <div className={styles.image}>
-                <img src="https://static.thenounproject.com/png/407855-200.png" alt="missing" />
-                </div>
-                <div className={styles.heads}>
-                <h1 className={styles.head}>300+</h1>
-                <p className={styles.head1}>Happy Customers</p>
-                </div>
+                <div className={styles.mainDiv}>
+                    <div className={styles.rectangle}>
+                        <div className={styles.formClass}>
+                            <div className={styles.items}>
+                                <h1>{singleProduct.profile?.headTitle} <br /> Registration in Delhi</h1>
+                                <p>{singleProduct.profile?.headDesc}</p>
+                                <div className={styles.saq}>
+                                    <div className={styles.saq1}>
+                                        <div className={styles.image}>
+                                            <img src="https://static.thenounproject.com/png/407855-200.png" alt="missing" />
+                                        </div>
+                                        <div className={styles.heads}>
+                                            <h1 className={styles.head}>300+</h1>
+                                            <p className={styles.head1}>Happy Customers</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.saq1}>
+                                        <div className={styles.image}>
+                                            <img src="https://static.thenounproject.com/png/407855-200.png" alt="missing" />
+                                        </div>
+                                        <div className={styles.heads}>
+                                            <h1 className={styles.head}>300+</h1>
+                                            <p className={styles.head1}>Happy Customers</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.saq1}>
+                                        <div className={styles.image}>
+                                            <img src="https://static.thenounproject.com/png/407855-200.png" alt="missing" />
+                                        </div>
+                                        <div className={styles.heads}>
+                                            <h1 className={styles.head}>300+</h1>
+                                            <p className={styles.head1}>Happy Customers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div className={styles.form}>
+                                {!token ? (
+                                    <>
+                                        <button onClick = {() => signin('google')}>Signin with google</button>
+                                        <button onClick = {() => signin('facebook')}>Signin with facebook</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button onClick = {() => logout()}>signOut</button>
+                                        <input disabled value={token.user.name} type='text'/>
+                                        <input disabled value={token.user.email} type='text'/>
+                                        <input type="text" placeholder="Phone Number" />
+                                        <input type="text" placeholder="Business Name" />
+                                    </>
+                                )}
+                                {userInfo?.role === '' ? (
+                                    <> 
+                                        <h4>Login</h4>
+                                        <input value={userMail} type = "email" onChange = {(e) => setUserMail(e.target.value)}/>
+                                        <input value={userPassword} type = "password" onChange = {(e) => setUserPassword(e.target.value)}/>
+                                        <button onClick = {handleLogin}>Login</button>
+                                    </>
 
+                                    ) : (
+                                    <>
+                                        <button onClick = {handleLogOut}>Log Out</button>
+                                    </>
+                                )}
+                                <div className={styles.formfooter}>
+                                    <div className={styles.formfooter1}>
+                                        <h3>Rs. 5999/</h3>
+                                        <p>**All Price Inclusion</p>
+                                    </div>
+                                    <div  className={styles.formfooter2}>
+                                        <button>
+                                            Get Started
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.rightAngle}></div>
                 </div>
-                <div className={styles.saq1}>
-                <div className={styles.image}>
-                <img src="https://static.thenounproject.com/png/407855-200.png" alt="missing" />
+            ) : (
+                <div>
+                    Loading...
                 </div>
-                <div className={styles.heads}>
-                <h1 className={styles.head}>300+</h1>
-                <p className={styles.head1}>Happy Customers</p>
-                </div>
-
-                </div>
-            </div>
-            </div>
-            
-            <div className={styles.form}>
-                {!token ? (
-                    <>
-                        <button onClick = {() => signin('google')}>Signin with google</button>
-                        <button onClick = {() => signin('facebook')}>Signin with facebook</button>
-                    </>
-                ) : (
-                    <>
-                        <button onClick = {() => logout()}>signOut</button>
-                        <input disabled value={token.user.name} type='text'/>
-                        <input disabled value={token.user.email} type='text'/>
-                        <input type="text" placeholder="Phone Number" />
-                        <input type="text" placeholder="Business Name" />
-                    </>
-                )}
-                    {userInfo?.role === '' ? (
-                        <> 
-                            <h4>Login</h4>
-                            <input value={userMail} type = "email" onChange = {(e) => setUserMail(e.target.value)}/>
-                            <input value={userPassword} type = "password" onChange = {(e) => setUserPassword(e.target.value)}/>
-                            <button onClick = {handleLogin}>Login</button>
-                        </>
-
-                    ) : (
-                        <>
-                            <button onClick = {handleLogOut}>Log Out</button>
-                        </>
-                    )
-                      
-                    }
-                
-
-                <div className={styles.formfooter}>
-                <div className={styles.formfooter1}>
-                    <h3>Rs. 5999/</h3>
-                    <p>**All Price Inclusion</p>
-                </div>
-                <div  className={styles.formfooter2}>
-                    <button>
-                        Get Started
-                    </button>
-                </div>
-                </div>
-            </div>
-            </div>
-            </div>
-            <div className={styles.rightAngle}></div>
-        </div>
+            )}
+        </>
     )
 }
 

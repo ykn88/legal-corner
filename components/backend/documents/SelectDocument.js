@@ -4,7 +4,7 @@ import styles from '../../../styles/backend/Form.module.scss'
 import baseUrl from '../../../helpers/baseUrl'
 
 
-const SelectDocument = ({documents, productList}) => {
+const SelectDocument = ({productList}) => {
     const [docArray, setDocArray] = useState([])
     const [product, setProduct] = useState(0)
     const [docs, setDocs] = useState(0)
@@ -12,7 +12,7 @@ const SelectDocument = ({documents, productList}) => {
     const handleChange = (e) => {
         const number = parseInt(e.target.value)
         setProduct(number)
-        const list = productList.filter(list => list.id === number)
+        const list = productList?.filter(list => list.id === number) || []
         const docList = list[0]?.ptd || []
         setDocArray(docList)
     }
@@ -88,16 +88,11 @@ const SelectDocument = ({documents, productList}) => {
             <div className={styles.input}>
                 <select onChange = {(e) => handleChange(e)}>
                     <option value = '0'>Select Product</option>
-                    {productList.map(list => (
-                        <option key={list.id} value={list.id}>{list.name}</option>
+                    {productList?.map(list => (
+                        <option key={list?.id} value={list?.id}>{list?.name}</option>
                     ))}
                 </select>
-                <select onChange = {(e) => setDocs(parseInt(e.target.value))} style={{width:'100%'}}>
-                    <option value='0'>Select Documnets</option>
-                    {documents.map(list => (
-                        <option key={list.id} value={list.id}>{list.name}</option>
-                    ))}
-                </select>
+                
                 <div className={styles.button}>
                     <button onClick = {handleSubmit}>Save</button>
                 </div>

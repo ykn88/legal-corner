@@ -13,7 +13,7 @@ import { parseCookies } from 'nookies'
 import jwt from 'jsonwebtoken'
 import baseUrl from '../helpers/baseUrl'
 
-const about = ({userData , category}) => {
+const about = () => {
     console.log(userData)
     console.log(category)
     let setUser
@@ -26,33 +26,33 @@ const about = ({userData , category}) => {
     )
 }
 
-export async function getServerSideProps(ctx) {
-    const {token1} = parseCookies(ctx)
+// export async function getServerSideProps(ctx) {
+//     const {token1} = parseCookies(ctx)
     
-    const userData = {
-        userId: 0,
-        email: '',
-        role: '',
-        name: ''
-    }
+//     const userData = {
+//         userId: 0,
+//         email: '',
+//         role: '',
+//         name: ''
+//     }
 
-    if(token1) {
-        const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
-        userData.email = email
-        userData.userId = userId,
-        userData.role = role,
-        userData.name = name
-    }
+//     if(token1) {
+//         const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
+//         userData.email = email
+//         userData.userId = userId,
+//         userData.role = role,
+//         userData.name = name
+//     }
 
-    const calye = await fetch(`${baseUrl}/api/category/getCategory`)
-    const category = await calye.json()
+//     const calye = await fetch(`${baseUrl}/api/category/getCategory`)
+//     const category = await calye.json()
     
-    console.log(userData)
-    return {
-        props: {
-            userData, category
-        }
-    }
-}
+//     console.log(userData)
+//     return {
+//         props: {
+//             userData, category
+//         }
+//     }
+// }
 
 export default about

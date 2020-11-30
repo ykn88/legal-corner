@@ -3,6 +3,7 @@ import styles from '../styles/Intro.module.scss'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const Intro = ({singleProduct}) => {
+    singleProduct = {}
     return (
         <div className={styles.intro}>
             <div className={styles.introMain}>
