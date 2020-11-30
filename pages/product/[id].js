@@ -13,9 +13,7 @@ import { parseCookies } from 'nookies'
 import jwt from 'jsonwebtoken'
 import baseUrl from '../../helpers/baseUrl'
 
-const about = ({userData , category}) => {
-    console.log(userData)
-    console.log(category)
+const about = ({userData , category, singleProduct}) => {
     let setUser
     const {user} = useRole()
     setUser = user
@@ -30,16 +28,16 @@ const about = ({userData , category}) => {
         <br />
         <br /> */}
         {/* <Nav /> */}
-            <Home userData = {userData}/>
+            <Home userData = {userData} singleProduct={singleProduct}/>
             <br />
             {/* <hr /> */}
             <Slider />
             {/* <hr /> */}
-            <Intro />
-            <Document />
-            <About />
+            <Intro singleProduct={singleProduct}/>
+            <Document singleProduct = {singleProduct}/>
+            <About singleProduct = {singleProduct}/>
             {/* <SliderTwo /> */}
-            <SliderBig />
+            <SliderBig singleProduct = {singleProduct}/>
         </div>
     )
 }
@@ -53,7 +51,8 @@ export async function getServerSideProps(ctx) {
         role: '',
         name: ''
     }
-
+    console.log('id: ',ctx.params.id)
+    const pid = parseInt(ctx.params.id)
     if(token1) {
         const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
         userData.email = email
@@ -64,11 +63,11 @@ export async function getServerSideProps(ctx) {
 
     const calye = await fetch(`${baseUrl}/api/category/getCategory`)
     const category = await calye.json()
-    
-    console.log(userData)
+    const singleProduct = await (await fetch(`${baseUrl}/api/product/${pid}`)).json()
+    console.log(singleProduct)
     return {
         props: {
-            userData, category
+            userData, category, singleProduct
         }
     }
 }

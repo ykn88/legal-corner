@@ -21,25 +21,7 @@ const about = ({userData , category}) => {
     setUser = user
     return (
         <div>
-
-        <NavBar category = {category} />
-        {/* <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br /> */}
-        {/* <Nav /> */}
-            <Home userData = {userData}/>
-            <br />
-            {/* <hr /> */}
-            <Slider />
-            {/* <hr /> */}
-            <Intro />
-            <Document />
-            <About />
-            {/* <SliderTwo /> */}
-            <SliderBig />
+           About Page
         </div>
     )
 }

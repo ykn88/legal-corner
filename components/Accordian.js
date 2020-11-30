@@ -10,7 +10,7 @@ import {
     Box,
   } from "@chakra-ui/react"
 
-const Accordian = () => {
+const Accordian = ({list}) => {
     return (
         <div><Accordion allowMultiple>
         <AccordionItem>
@@ -19,7 +19,7 @@ const Accordian = () => {
                 <AccordionButton _expanded={{ bg: "#DF2938", color: "white", borderRadius:'8px', border:'none'}}
                 className={styles.item}>
                 <Box flex="1" textAlign="left" style={{height:"1.3rem", borderRadius:'20px'}}>
-                    Section 2 title
+                    {list?.question}
                 </Box>
                 {isExpanded ? (
                     <MinusIcon fontSize="12px" />
@@ -31,10 +31,7 @@ const Accordian = () => {
                 style={{ borderRadius:'5px', padding: ".5rem .5rem",  border:'0px solid black',
                 borderTopLeftRadius:"0",
                 backgroundColor:'#DF2938', margin:'.21rem .1rem', color:'white', marginTop:'0rem'}}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat.
+                {list?.answers}
                 </AccordionPanel>
             </>
             )}
