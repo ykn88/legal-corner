@@ -10,7 +10,7 @@ const breakPoints = [
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 },
   ];
-const Slider = () => {
+const Slider = ({singleProduct}) => {
     return (
         <div>
               
@@ -20,7 +20,7 @@ const Slider = () => {
                     <h3>MUST READ ARTICLES</h3>
                 </div>
                 <div className={styles.headings}>
-                    <h2>Private Limited Company Registration</h2>   
+                    <h2>{singleProduct.name}</h2>   
                     <p><ExternalLinkIcon /></p>
                 </div>
             </div>
@@ -31,12 +31,12 @@ const Slider = () => {
                     <div className={styles.img}>
                         {/* <img src="https://www.coxdigitalsolutions.com/wp-content/uploads/2018/12/online-business-tips-illustration-coxdigitalsolutions.jpg" /> */}
                         <div className={styles.para}>
-                        <p>Private Limited Company Registration</p>
+                        <p>{singleProduct.name}</p>
                         </div>
                     </div>
                     <div className={styles.element}>
                         <h2>
-                        Benefits of Private Limited Company Registration
+                        Benefits of {singleProduct.name}
                         </h2>
                         <p>
                         Before getting started, you should know this is alpha software. Blitz is incomplete. There are rough spots and bugs. APIs may change.

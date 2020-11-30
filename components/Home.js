@@ -8,8 +8,8 @@ import {parseCookies} from 'nookies'
 import cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 
-const Home = ({userData}) => {
-    console.log(userData)
+const Home = ({userData, singleProduct}) => {
+    console.log(singleProduct)
     const [userMail, setUserMail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const [token, setToken] = useState(null)
@@ -69,8 +69,8 @@ const Home = ({userData}) => {
             <div className={styles.rectangle}>
             <div className={styles.formClass}>
             <div className={styles.items}>
-            <h1>Private Limited Company <br /> Registration in (City Name)</h1>
-            <p>We provide quick and affordable service to register a private limited company through 100% online process. Our services are trusted by thousands of businesses in all major cities of India. Pvt Ltd Company Registration is highly preferred by startups.</p>
+            <h1>{singleProduct.profile?.headTitle} <br /> Registration in Delhi</h1>
+            <p>{singleProduct.profile?.headDesc}</p>
             <div className={styles.saq}>
                 <div className={styles.saq1}>
                 <div className={styles.image}>
