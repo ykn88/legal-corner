@@ -1,0 +1,121 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteModel",
+      "model": "ProductProfile"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "ProductToDocuments"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Product",
+      "field": "short",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Product",
+      "field": "long",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Product",
+      "field": "videoUrl",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Product",
+      "field": "document",
+      "type": "Documents",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Product",
+      "field": "profile"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Product",
+      "field": "ptd"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Product",
+      "field": "price",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Documents",
+      "field": "product",
+      "type": "Product",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Documents",
+          "field": "product"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Documents",
+          "field": "product"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[productId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Documents",
+          "field": "product"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Documents",
+      "field": "productId",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Documents",
+      "field": "ptd"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Documents",
+      "field": "name",
+      "arity": "Optional"
+    }
+  ]
+}
