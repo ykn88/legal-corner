@@ -4,9 +4,14 @@ import styles2 from '../styles/Nav.module.scss'
 import {CSSTransition} from 'react-transition-group';
 import { ChevronDownIcon, ChevronLeftIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {useSession, signOut, signIn, getCsrfToken, getSession} from 'next-auth/client'
+import { Link } from '@chakra-ui/react';
+
+// import Link from 'next/link'
+
 
 const NavBar = ({category}) => {
-    category = []
+    // category = []
+    console.log(category.name)
     return (
         <div>
             {category.length ? 
@@ -26,13 +31,17 @@ const NavBar = ({category}) => {
                                                 <ul>
                                                     {category.map(categorys=> (
                                                         <li className={styles2.dropdown} key={categorys?.id}>
-                                                            <a href='#' className={styles2.hover}>{categorys?.name}</a>
+                                                            <a href='#' className={styles2.hover}>{categorys.name}</a>
                                                             <ul className={styles2.menuArea} >
                                                                 {categorys?.productHead?.map(subcategory=>(
                                                                     <ul key={subcategory?.id} >
                                                                         <h4>{subcategory?.name}</h4>
                                                                         {subcategory?.product.map(products =>(
-                                                                        <li key={products?.id}><a href={products?.id}>{products?.name}</a></li>
+                                                                        <li key={products?.id}>
+                                                                        <Link href={products?.id}>
+                                                                        <a >{products?.name}</a>
+                                                                        </Link>
+                                                                        </li>
                                                                         ))}
                                                                     </ul>
                                                                 ))}
