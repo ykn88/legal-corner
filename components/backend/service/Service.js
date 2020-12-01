@@ -76,7 +76,7 @@ const Service = ({categorys, sub}) => {
                         <select onChange = {(e) => setId(parseInt(e.target.value))}>
                             <option value = '0'>Select Sub Category</option>
                             {filterList.map(list => (
-                                <option value = {list.id}>{list.name}</option>
+                                <option key={list.id} value = {list.id}>{list.name}</option>
                             ))}
                         </select>
                     </div>

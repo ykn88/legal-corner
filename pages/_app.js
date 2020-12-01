@@ -12,15 +12,5 @@ function MyApp({ Component, pageProps, category }) {
   </Provider> 
 }
 
-export async function getStaticProps() {
-  const data = await fetch(`${baseUrl}/api/category/getCategory`)
-  const category = await data.json() || []
-  return {
-    props: {
-      category
-    }
-  }
-}
-
 
 export default MyApp
