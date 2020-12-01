@@ -3,7 +3,7 @@ import styles from '../styles/Intro.module.scss'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const Intro = ({singleProduct}) => {
-    singleProduct = {}
+    // singleProduct = {}
     return (
         <div className={styles.intro}>
             <div className={styles.introMain}>
@@ -11,13 +11,14 @@ const Intro = ({singleProduct}) => {
                     <h3>ALL YOU NEED TO KNOW</h3>
                 </div>
                 <div className={styles.headings}>
-                    <h2>{singleProduct.profile?.bodyTitle}</h2>   
+                    <h2>{singleProduct.name}</h2>   
                     <p><ExternalLinkIcon /></p>
                 </div>
             </div>
             <div className={styles.containt}>
                 <p>
-                   {singleProduct.profile?.bodyDesc}
+                   {/* {singleProduct.profile?.bodyDesc} */}
+                   {singleProduct.long}
                 </p>
                 {/* <video src="https://youtu.be/4W_J6lX0aZ0" alt="not support"
                 style={{border:'2px solid black'}}/> */}

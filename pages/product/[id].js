@@ -13,22 +13,38 @@ import { parseCookies } from 'nookies'
 import jwt from 'jsonwebtoken'
 import baseUrl from '../../helpers/baseUrl'
 
-const product = () => {
+const product = ({singleProduct, category,subCategory}) => {
     return (
         <div>
             {/* <Nav /> */}
+            <NavBar category={category} subCategory={subCategory} />
             {/* <Home userData = {userData} singleProduct={singleProduct}/> */}
             <br />
-            {/* <hr /> */}
-            {/* <Slider /> */}
-            {/* <hr /> */}
-            {/* <Intro singleProduct={singleProduct}/> */}
-            {/* <Document singleProduct = {singleProduct}/> */}
-            {/* <About singleProduct = {singleProduct}/> */}
+            <hr />
+            <Slider />
+            <hr />
+            <Intro singleProduct={singleProduct}/>
+            <Document singleProduct = {singleProduct}/>
+            <About singleProduct = {singleProduct}/>
             {/* <SliderTwo /> */}
-            {/* <SliderBig singleProduct = {singleProduct}/> */}
+            <SliderBig singleProduct = {singleProduct}/>
         </div>
     )
+}
+
+
+export async function getServerSideProps(ctx) {
+    const pid = parseInt(ctx.params.id)
+    const singleProduct = await (await fetch(`${baseUrl}/api/product/${pid}`)).json()
+    console.log(singleProduct)
+    const category =    await (await fetch(`${baseUrl}/api/category/getCategory`)).json()
+    const subCategory =    await (await fetch(`${baseUrl}/api/subCategory/getSubCategory`)).json()
+    
+    return {
+        props: {
+            singleProduct,category,subCategory
+        }
+    }
 }
 
 // export async function getServerSideProps(ctx) {
