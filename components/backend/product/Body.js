@@ -5,7 +5,7 @@ import RichEditorExample from '../../../helpers/index'
 import dynamic from 'next/dynamic'
 import baseUrl from '../../../helpers/baseUrl'
 
-const Body = () => {
+const Body = ({singleProduct}) => {
 
     if(typeof window!== undefined) {
         import('../../../helpers/index')
@@ -17,26 +17,28 @@ const Body = () => {
     )
 
     const handleSubmit = async (e) => {
+        alert("saved / updated")
         e.preventDefault()
-        let body = ''
+        let long = ''
         let value
        
         if(typeof window !== "undefined"){
             value = JSON.parse(window.localStorage.getItem('value'))
-            value.blocks.forEach(block => body += block.text)   
+            value.blocks.forEach(block => long += block.text)   
         }
-        const res = await fetch(`${baseUrl}/api/product/addBody`, {
+        const res = await fetch(`${baseUrl}/api/product/updateProductLong`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                body
+                long,
+                id:singleProduct.id,
             })
         })
         const data = await res.json()
         console.log(data)
-        setTitle('')
+        // setTitle('')
     }
 
     return (
