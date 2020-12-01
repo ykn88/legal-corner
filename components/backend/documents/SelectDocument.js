@@ -86,12 +86,12 @@ const SelectDocument = ({productList}) => {
                 </div>
             ))}
             <div className={styles.input}>
-                <select onChange = {(e) => handleChange(e)}>
+                {/* <select onChange = {(e) => handleChange(e)}>
                     <option value = '0'>Select Product</option>
                     {productList?.map(list => (
                         <option key={list?.id} value={list?.id}>{list?.name}</option>
                     ))}
-                </select>
+                </select> */}
                 
                 <div className={styles.button}>
                     <button onClick = {handleSubmit}>Save</button>

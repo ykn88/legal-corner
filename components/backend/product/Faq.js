@@ -84,12 +84,12 @@ const Faq = ({productList}) => {
             <div className={styles.input}>
                 <form>
                     <div className={styles.input1}>
-                        <select onChange = {(e) => setId(parseInt(e.target.value))}>
+                        {/* <select onChange = {(e) => setId(parseInt(e.target.value))}>
                             <option value = '0'>Select Product</option>
                             {productList.map(list => (
                                 <option key={list.id} value={list.id}>{list.name}</option>
                             ))}
-                        </select>
+                        </select> */}
                     </div>
                     <div className={styles.input1}>
                         <input className={styles.inp4} type="text" placeholder="Question" onChange = {(e) => setQuestion(e.target.value)} />
