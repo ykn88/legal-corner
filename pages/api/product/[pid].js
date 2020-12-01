@@ -9,7 +9,6 @@ export default async function (req, res) {
             id: parseInt(pid)
         },
         include: {
-            profile: true,
             document: true,
             faq: true
         }
