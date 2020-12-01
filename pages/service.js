@@ -3,12 +3,12 @@ import Header from '../components/backend/Header'
 import Service from '../components/backend/service/Service'
 import baseUrl from '../helpers/baseUrl'
 
-const service = ({categorys}) => {
+const service = ({categorys, sub}) => {
     return (
         <div>
             <Header />
             <br /><br /><br /><br />
-            <Service categorys={categorys} />
+            <Service categorys={categorys} sub={sub}/>
         </div>
     )
 }
@@ -48,11 +48,12 @@ export async function getServerSideProps(ctx) {
 
     const data = await fetch(`${baseUrl}/api/category/getCategory`)
     const categorys = await data.json()
-
+    const data2 = await fetch(`${baseUrl}/api/subCategory/getSubCategory`)
+    const sub = await data2.json()
 
     return {
         props: {
-           categorys
+           categorys, sub
         }
     }
 }
