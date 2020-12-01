@@ -9,18 +9,7 @@ import Next from '../../../helpers/NewEditor'
 
 const Headers = ({singleProduct}) => {
 
-    // const [title, setTitle] = useState('')
-    const [short, setShort] = useState('')
-    const [id, setId] = useState(0)
-
-    if(typeof window!== undefined) {
-        import('../../../helpers/index')
-    }
-
-    const Check = dynamic(() => 
-        {return import('../../../helpers/index')},
-        {ssr: true}
-    )
+    const [short, setShort] = useState(singleProduct.short || '')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -41,12 +30,10 @@ const Headers = ({singleProduct}) => {
                 body: JSON.stringify({
                     id : singleProduct.id,
                     short,
-                    // body
                 })
             })
-            
-            console.log(res)
-            setShort('')
+            const data = await res.json()
+            console.log(data)
         }   
     }
 
@@ -67,11 +54,9 @@ const Headers = ({singleProduct}) => {
                 <form>
                 
                     <div className={styles.input2}>
-                        {/* <Check /> */}
-                        <input className={styles.inp3} placeholder="enter sh d" type="text"
-                         onChange={e => setShort(e.target.value)}
-                             value={singleProduct?.short}
-                         />
+                        <textarea className={styles.inp3} placeholder="short desc here" type="text"
+                         onChange={e => setShort(e.target.value)} value={short}
+                        />
                     </div>
                     <div className={styles.button}>
                         <button onClick = {handleSubmit}>Save</button>

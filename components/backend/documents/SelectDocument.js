@@ -4,98 +4,95 @@ import styles from '../../../styles/backend/Form.module.scss'
 import baseUrl from '../../../helpers/baseUrl'
 
 
-const SelectDocument = ({productList}) => {
-    const [docArray, setDocArray] = useState([])
-    const [product, setProduct] = useState(0)
-    const [docs, setDocs] = useState(0)
-
-    const handleChange = (e) => {
-        const number = parseInt(e.target.value)
-        setProduct(number)
-        const list = productList?.filter(list => list.id === number) || []
-        const docList = list[0]?.ptd || []
-        setDocArray(docList)
-    }
-
-    const newList = (data) => {
-        setDocArray(prevState => [
-            ...prevState, data
-        ])
-    }
-
-    const reduceList = (data) => {
-        const value = docArray.filter(list => list.documentId !== data.documentId)
-        setDocArray(value)
-    }
-
-    const deleteProduct = async (value) => {
-        console.log(value)
-        const res = await fetch(`${baseUrl}/api/productToDoc/deleteDocument`, {
+const SelectDocument = ({singleProduct}) => {
+    const [name, setName] = useState('')
+    const [desc, setDesc] = useState('')
+    const [docList, setDocList] = useState(singleProduct.document || [])
+    const handleChange = async (e) => {
+        e.preventDefault()
+        const value = await fetch(`${baseUrl}/api/documents/addDocument`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                documentId: value.documentId,
-                productId: value.productId
+                name,
+                desc,
+                productId: singleProduct.id
             })
         })
-        const data = await res.json()
-        reduceList(data)
+        const data = await value.json()
+        console.log(data)
+        setDocList(prevData => [
+            ...prevData, data
+        ])
+        setName('')
+        setDesc('')
     }
 
-    const handleSubmit = async () => {
-        if(product === 0 || docs === 0)
-           alert('Please enter all fields')
-        else {
-            const res = await fetch(`${baseUrl}/api/productToDoc/create`, {
-                method: "POST",
-                headers: {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({
-                    productId: product,
-                    documentId: docs 
-                })
+    const handleDelete = async (id) => {
+
+        const res = await fetch(`${baseUrl}/api/documents/deleteDocuments`,{
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                id
             })
-            const data = await res.json()
-            newList(data)
-        }   
+        })
+
+        const data = await res.json()
+        if(data.error) {
+            console.log(data.error)
+            alert(data.error)
+        }
+        else {
+            console.log(data)
+            const list = docList.filter(list => list.id !== data.id)
+            console.log(list)
+            setDocList(list)
+        }
+
     }
 
     return (
         <div className={styles.first}>
             <div className={styles.head}>
-                <h1>Document Requirement</h1>
+                <h1>Documents Required</h1>
                 <div className={styles.ebutton}>
-                <p>Switch</p>
+                    <p><EditIcon /></p>
+                    <p>Switch</p>
                 </div>
             </div>
-            
-            {docArray.map(list => (
-                <div key = {list?.document?.id} className={styles.card}>
+
+            {docList.map(list => (
+                <div key={list.id} className={styles.card}>
                     <div className={styles.card1}>
-                            <h1>{list?.document?.name}</h1>
-                            <div className={styles.card2}>
-                                <p>{list?.document?.desc}</p>
-                                <div className={styles.delete}>
-                                    <p onClick = {() => deleteProduct(list)} className={styles.d}> <DeleteIcon /> </p>
-                                </div>
+                        <h1>{list?.name}</h1>
+                        <div className={styles.card2}>
+                            <p>{list?.desc}</p>
+                            <div className={styles.delete}>
+                                <p onClick={() => handleDelete(list.id)} className={styles.d}> <DeleteIcon /> </p>
                             </div>
+                        </div>
                     </div>
                 </div>
-            ))}
+            ))}  
+         
             <div className={styles.input}>
-                {/* <select onChange = {(e) => handleChange(e)}>
-                    <option value = '0'>Select Product</option>
-                    {productList?.map(list => (
-                        <option key={list?.id} value={list?.id}>{list?.name}</option>
-                    ))}
-                </select> */}
-                
-                <div className={styles.button}>
-                    <button onClick = {handleSubmit}>Save</button>
-                </div>
+                <form>
+                    <div className={styles.input1}>
+                        <input className={styles.inp4} value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Document Title" />
+                    </div>
+                    <div className={styles.input1}>
+                        <textarea className={styles.inp4} value={desc} onChange={(e) => setDesc(e.target.value)} rows="4" cols="50" placeholder="Document Description" />
+                    </div>
+                    
+                    <div className={styles.button}>
+                        <button onClick={handleChange}>Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     )

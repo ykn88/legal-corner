@@ -5,11 +5,12 @@ import RichEditorExample from '../../../helpers/index'
 import dynamic from 'next/dynamic'
 import baseUrl from '../../../helpers/baseUrl'
 
-const InvolvedSteps = ({productList}) => {
+const InvolvedSteps = ({singleProduct}) => {
 
     const [to, setTo] = useState('')
     const [from, setFrom] = useState('')
     const [id, setId] = useState('')
+    const [steps, setSteps] = useState(singleProduct?.steps || [])
 
     if(typeof window!== undefined) {
         import('../../../helpers/index')
@@ -31,13 +32,14 @@ const InvolvedSteps = ({productList}) => {
                 value = JSON.parse(window.localStorage.getItem('value'))
                 value.blocks.forEach(block => body += block.text)   
             }
+            console.log(to, from, body)
             const res = await fetch(`${baseUrl}/api/steps/addSteps`, {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({
-                    id,
+                    id: singleProduct.id,
                     to,
                     body,
                     from
@@ -45,9 +47,44 @@ const InvolvedSteps = ({productList}) => {
             })
             const data = await res.json()
             console.log(data)
-            setTo('')
-            setFrom('')
+            if(data.error) {
+                console.log(data.error)
+                alert(data.error)
+            }
+            else {
+                setTo('')
+                setFrom('')
+                setSteps(prevData => [
+                    ...prevData, data
+                ])
+            }
         }   
+    }
+
+    const handleDelete = async (id) => {
+
+        const res = await fetch(`${baseUrl}/api/steps/deleteStep`,{
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                id
+            })
+        })
+
+        const data = await res.json()
+        if(data.error) {
+            console.log(data.error)
+            alert(data.error)
+        }
+        else {
+            console.log(data)
+            const list = steps.filter(list => list.id !== data.id)
+            console.log(list)
+            setSteps(list)
+        }
+
     }
 
     return (
@@ -58,44 +95,26 @@ const InvolvedSteps = ({productList}) => {
                 <p>Switch</p>
                 </div>
             </div>
-            <div className={styles.card}>
-            <div className={styles.card1}>
-                <h1>1) Pan Card</h1>
-                <div className={styles.card2}>
-                    <p>Description</p>
-                    <div className={styles.delete}>
-                        <p className={styles.e}><EditIcon /></p>
-                        <p className={styles.d}> <DeleteIcon /> </p>
-                    </div>
-                </div>
-            </div>
-
-            </div>
-            <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                        <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
+            {steps.map(list => (
+                <div key={list.id} className={styles.card}>
+                    <div className={styles.card1}>
+                        <h1>From Day: {list?.fromDay}</h1>
+                        <h1>Till Day: {list?.toDay}</h1>
+                        <div className={styles.card2}>
+                            <p>{list?.description}</p>
+                            <div className={styles.delete}>
+                                <p onClick={() => handleDelete(list.id)} className={styles.d}> <DeleteIcon /> </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={styles.input}>
-                {/* <select onChange = {(e) => setId(parseInt(e.target.value))}>
-                    <option value = '0'>Select Product</option>
-                    {productList.map(list => (
-                        <option key={list.id} value={list.id}>{list.name}</option>
-                    ))}
-                </select> */}
-            </div>
+            ))}
+            
             <div className={styles.input}>    
                 <form>
                     <div className={styles.input1}>
-                        <input className={styles.inp50} type="text" placeholder="From Day" onChange = {(e) => setTo(e.target.value)}/>
-                        <input className={styles.inp50} type="text" placeholder="To Day" onChange = {(e) => setFrom(e.target.value)}/>
+                        <input className={styles.inp50} type="text" placeholder="From Day" onChange = {(e) => setFrom(e.target.value)}/>
+                        <input className={styles.inp50} type="text" placeholder="Till Day" onChange = {(e) => setTo(e.target.value)}/>
                     </div>
                     <div className={styles.input2}>
                         <Check />

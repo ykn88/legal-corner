@@ -11,7 +11,7 @@ import baseUrl from '../../../helpers/baseUrl';
 
 const AddVideo = ({singleProduct}) => {
 
-    const [videoUrl, setVideoUrl]= useState("")
+    const [videoUrl, setVideoUrl]= useState(singleProduct?.videoUrl || "")
 
     // const handleEditorChange = (value) => {
     //     console.log(value)
@@ -78,8 +78,7 @@ const AddVideo = ({singleProduct}) => {
                         <div className={styles.input1}>
                             <input className={styles.inp4} type="text" placeholder="YouTube Video Link"
                             onChange={e => setVideoUrl(e.target.value)}
-                             value={singleProduct?.videoUrl}
-                             />
+                            />
                         </div>
                         {/* <select>
                             <option value = '0'>Select a product</option>

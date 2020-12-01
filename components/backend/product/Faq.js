@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import baseUrl from '../../../helpers/baseUrl'
 
 
-const Faq = ({productList}) => {
+const Faq = ({singleProduct}) => {
 
     if(typeof window!== undefined) {
         import('../../../helpers/index')
@@ -17,8 +17,9 @@ const Faq = ({productList}) => {
         {ssr: false}
     )
 
-    const [id, setId] = useState(0)
+    const [id, setId] = useState(singleProduct.id)
     const [question, setQuestion] = useState('')
+    const [blogs, setBlogs] = useState(singleProduct.faq || [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -43,9 +44,44 @@ const Faq = ({productList}) => {
                 })
             })
             const data = await res.json()
-            console.log(data)
-            setQuestion('')
+            if(data.error) {
+                console.log(data.error)
+                alert(data.error)
+            }
+            else {
+                console.log(data)
+                setQuestion('')
+                setBlogs(prevData => [
+                    ...prevData, data
+                ])
+            }
         }   
+    }
+
+    const handleDelete = async (id) => {
+
+        const res = await fetch(`${baseUrl}/api/faq/deleteFaq`,{
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                id
+            })
+        })
+
+        const data = await res.json()
+        if(data.error) {
+            console.log(data.error)
+            alert(data.error)
+        }
+        else {
+            console.log(data)
+            const list = blogs.filter(list => list.id !== data.id)
+            console.log(list)
+            setBlogs(list)
+        }
+
     }
 
     return (
@@ -56,41 +92,21 @@ const Faq = ({productList}) => {
                     <p>Switch</p>
                 </div>
             </div>
-            <div className={styles.card}>
-                <div className={styles.card1}>
-                    <h1>1) Pan Card</h1>
-                    <div className={styles.card2}>
-                        <p>Description</p>
-                        <div className={styles.delete}>
-                            <p className={styles.e}><EditIcon /></p>
-                            <p className={styles.d}> <DeleteIcon /> </p>
+            {blogs.map(list => (
+                <div key={list.id} className={styles.card}>
+                    <div className={styles.card1}>
+                        <h1>{list?.question}</h1>
+                        <div className={styles.card2}>
+                            <p>{list?.answers}</p>
+                            <div className={styles.delete}>
+                                <p onClick={() => handleDelete(list.id)} className={styles.d}> <DeleteIcon /> </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={styles.card}>
-            <div className={styles.card1}>
-                <h1>1) Pan Card</h1>
-                <div className={styles.card2}>
-                    <p>Description</p>
-                    <div className={styles.delete}>
-                        <p className={styles.e}><EditIcon /></p>
-                        <p className={styles.d}> <DeleteIcon /> </p>
-                    </div>
-                </div>
-            </div>
-
-            </div>
+            ))}
             <div className={styles.input}>
                 <form>
-                    <div className={styles.input1}>
-                        {/* <select onChange = {(e) => setId(parseInt(e.target.value))}>
-                            <option value = '0'>Select Product</option>
-                            {productList.map(list => (
-                                <option key={list.id} value={list.id}>{list.name}</option>
-                            ))}
-                        </select> */}
-                    </div>
                     <div className={styles.input1}>
                         <input className={styles.inp4} type="text" placeholder="Question" onChange = {(e) => setQuestion(e.target.value)} />
                     </div>
