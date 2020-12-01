@@ -89,6 +89,22 @@ $save :#092965;
                color: $color;
            }
        }
+       .selectbox{
+           width: 90%;
+           margin: auto;
+           display: flex;
+           justify-content: space-between;
+
+           select{
+               width: 45%;
+               height: 2rem;
+               background-color: $input;
+               color: $placeholder;
+               outline: none;
+               padding-left: .5rem;
+               border: none;
+           }
+       }
     }
     .card{
         background-color: $color;
