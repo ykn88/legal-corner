@@ -10,7 +10,8 @@ export default async function (req, res) {
         },
         include: {
             document: true,
-            faq: true
+            faq: true,
+            steps: true
         }
     })
     console.log(product)

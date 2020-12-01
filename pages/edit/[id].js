@@ -18,9 +18,9 @@ const edit = ({singleProduct}) => {
             <Headers singleProduct={singleProduct}  />
             <Body singleProduct={singleProduct}/>
             <AddVideo singleProduct={singleProduct} />
-            <SelectDocument />
-            <InvolvedSteps />
-            <Faq />
+            <SelectDocument singleProduct = {singleProduct}/>
+            <InvolvedSteps singleProduct = {singleProduct}/>
+            <Faq singleProduct={singleProduct}/>
 
         </div>
     )
