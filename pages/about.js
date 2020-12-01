@@ -14,11 +14,7 @@ import jwt from 'jsonwebtoken'
 import baseUrl from '../helpers/baseUrl'
 
 const about = () => {
-    console.log(userData)
-    console.log(category)
-    let setUser
-    const {user} = useRole()
-    setUser = user
+    
     return (
         <div>
            About Page
@@ -36,13 +32,13 @@ const about = () => {
 //         name: ''
 //     }
 
-//     if(token1) {
-//         const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
-//         userData.email = email
-//         userData.userId = userId,
-//         userData.role = role,
-//         userData.name = name
-//     }
+    // if(token1) {
+    //     const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
+    //     userData.email = email
+    //     userData.userId = userId,
+    //     userData.role = role,
+    //     userData.name = name
+    // }
 
 //     const calye = await fetch(`${baseUrl}/api/category/getCategory`)
 //     const category = await calye.json()

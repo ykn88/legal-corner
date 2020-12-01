@@ -17,7 +17,7 @@ const product = ({singleProduct, category,subCategory}) => {
     return (
         <div>
             {/* <Nav /> */}
-            <NavBar category={category} subCategory={subCategory} />
+            <NavBar category={category} subCategory={subCategory}/>
             {/* <Home userData = {userData} singleProduct={singleProduct}/> */}
             <br />
             <hr />
@@ -34,11 +34,12 @@ const product = ({singleProduct, category,subCategory}) => {
 
 
 export async function getServerSideProps(ctx) {
+  
     const pid = parseInt(ctx.params.id)
     const singleProduct = await (await fetch(`${baseUrl}/api/product/${pid}`)).json()
     console.log(singleProduct)
-    const category =    await (await fetch(`${baseUrl}/api/category/getCategory`)).json()
-    const subCategory =    await (await fetch(`${baseUrl}/api/subCategory/getSubCategory`)).json()
+    const category = await (await fetch(`${baseUrl}/api/category/getCategory`)).json()
+    const subCategory = await (await fetch(`${baseUrl}/api/subCategory/getSubCategory`)).json()
     
     return {
         props: {
@@ -47,30 +48,6 @@ export async function getServerSideProps(ctx) {
     }
 }
 
-// export async function getServerSideProps(ctx) {
-//     const {token1} = parseCookies(ctx)
-    
-//     const userData = {
-//         userId: 0,
-//         email: '',
-//         role: '',
-//         name: ''
-//     }
-//     const pid = parseInt(ctx.params.id)
-//     if(token1) {
-//         const { userId, email, role, name } = jwt.verify(token1, process.env.JWT_SECRET)
-//         userData.email = email
-//         userData.userId = userId,
-//         userData.role = role,
-//         userData.name = name
-//     }
-//     const singleProduct = await (await fetch(`${baseUrl}/api/product/${pid}`)).json()
-//     console.log(singleProduct)
-//     return {
-//         props: {
-//             singleProduct
-//         }
-//     }
-// }
+
 
 export default product
