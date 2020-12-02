@@ -1,6 +1,6 @@
 .mainDiv{
     display: flex;
-    height: 59vh;
+    min-height: 50vh;
 
     // border: 2px solid red;
 }
@@ -8,7 +8,7 @@
 .rightAngle{
     width: 0;
     height: 0;
-    border-bottom: 485px solid white;
+    border-bottom: 630px solid white;
     border-left: 800px solid transparent;
     margin-left: -50rem;
     
@@ -163,7 +163,7 @@ box-shadow: 04px 04px 4px rgb(250, 43, 43);
     }
     .rectangle{
         width: 100vw;
-        height: 125vh;
+        min-height: 110vh;
         background-color: #003089;
     
         .formClass{
@@ -240,7 +240,7 @@ box-shadow: 04px 04px 4px rgb(250, 43, 43);
         }
         .form{
             width: 90vw;
-            height: 60vh;
+            height: 65vh;
             background-color: #003089;
             margin: auto;
             // margin-right: 10rem;
