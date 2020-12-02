@@ -18,7 +18,7 @@ const product = ({singleProduct, category,subCategory}) => {
         <div>
             {/* <Nav /> */}
             <NavBar category={category} subCategory={subCategory}/>
-            {/* <Home userData = {userData} singleProduct={singleProduct}/> */}
+            <Home singleProduct={singleProduct}/>
             <br />
             <hr />
             <Slider />

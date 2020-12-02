@@ -9,18 +9,18 @@ import cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 
 const Home = ({userData, singleProduct}) => {
-    singleProduct = {}
+    // singleProduct = {}
     const [userMail, setUserMail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const [token, setToken] = useState(null)
     const [userInfo, setUserInfo] = useState(userData || {})
   
-    useEffect(() => {
-      const loadData = async() => {
-          setToken(await getSession())
-      }
-      loadData()
-    }, [])
+    // useEffect(() => {
+    //   const loadData = async() => {
+    //       setToken(await getSession())
+    //   }
+    //   loadData()
+    // }, [])
 
     const logout = async () => {
         await signout()
@@ -65,14 +65,15 @@ const Home = ({userData, singleProduct}) => {
 
     return (
         <>
-            {singleProduct.length? (
+            {/* {singleProduct.length? ( */}
 
                 <div className={styles.mainDiv}>
                     <div className={styles.rectangle}>
                         <div className={styles.formClass}>
                             <div className={styles.items}>
-                                <h1>{singleProduct.profile?.headTitle} <br /> Registration in Delhi</h1>
-                                <p>{singleProduct.profile?.headDesc}</p>
+                            
+                                <h1>{singleProduct.name} <br /> </h1>
+                                <p>{singleProduct.short}</p>
                                 <div className={styles.saq}>
                                     <div className={styles.saq1}>
                                         <div className={styles.image}>
@@ -105,7 +106,11 @@ const Home = ({userData, singleProduct}) => {
                             </div>
                         
                             <div className={styles.form}>
-                                {!token ? (
+                                        <input type='text' placeholder="Name" />
+                                        <input type='text' placeholder="Email" />
+                                        <input type="text" placeholder="Phone Number" />
+                                        <input type="text" placeholder="Business Name" />
+                                {/* {!token ? (
                                     <>
                                         <button onClick = {() => signin('google')}>Signin with google</button>
                                         <button onClick = {() => signin('facebook')}>Signin with facebook</button>
@@ -131,7 +136,7 @@ const Home = ({userData, singleProduct}) => {
                                     <>
                                         <button onClick = {handleLogOut}>Log Out</button>
                                     </>
-                                )}
+                                )} */}
                                 <div className={styles.formfooter}>
                                     <div className={styles.formfooter1}>
                                         <h3>Rs. 5999/</h3>
@@ -148,11 +153,11 @@ const Home = ({userData, singleProduct}) => {
                     </div>
                     <div className={styles.rightAngle}></div>
                 </div>
-            ) : (
+            {/* ) : (
                 <div>
                     Loading...
-                </div>
-            )}
+                </div> */}
+            {/* )} */}
         </>
     )
 }
