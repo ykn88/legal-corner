@@ -6,7 +6,7 @@ import Intro from '../../components/Intro'
 import Document from '../../components/Document'
 import SliderTwo from '../../components/SliderTwo'
 import SliderBig from '../../components/SliderBig'
-import NavBar from '../../components/NavBar'
+import NavBar, { DropdownMenu } from '../../components/NavBar'
 import Nav from '../../components/Nav'
 import useRole from '../../hooks/useRole'
 import { parseCookies } from 'nookies'
@@ -18,6 +18,7 @@ const product = ({singleProduct, category,subCategory}) => {
         <div>
             {/* <Nav /> */}
             <NavBar category={category} subCategory={subCategory}/>
+            
             <Home singleProduct={singleProduct}/>
             <br />
             <hr />
