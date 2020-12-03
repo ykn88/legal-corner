@@ -81,7 +81,7 @@ const NavBar = ({category}) => {
             }
         </div>
     )
-}
+
 
 function BackIcon(){
     return(
@@ -117,6 +117,11 @@ function DropdownMenu(){
         ); 
     }
     return(
+        <>
+        
+        
+
+        
         <div className={styles.dropdownMenu} 
         // style={{height:menuHeight}}
         >
@@ -129,27 +134,52 @@ function DropdownMenu(){
             <a href="#" style={{backgroundColor:'red', padding:'.5rem 1rem'}}>BOOK A SERVICE</a>
             
             </DropdownItem>
-            <DropdownItem leftIcon={<CozIcon />} rightIcon={<CozIcon2 />}
+            {/* <DropdownItem leftIcon={<CozIcon />} rightIcon={<CozIcon2 />}
             goToMenu="company"
              >COMPANY</DropdownItem>
             <DropdownItem leftIcon={<CozIcon />} rightIcon={<CozIcon2 />}
             goToMenu="registration"
-             >REGISTRATION</DropdownItem>
+             >REGISTRATION</DropdownItem> */}
+             {category.map(categoryss=>(
+            <DropdownItem leftIcon={<CozIcon />} rightIcon={<CozIcon2 />}
+            goToMenu={categoryss.name}
+            key={categoryss?.id} > {categoryss.name} </DropdownItem>
+             ))}
+          
         </div>
         </CSSTransition>
-        <CSSTransition in={activeMenu==='company'} unmountOnExit timeout={500}
+        {category.map(categoryss=>(
+            <>
+
+            <h1 style={{display:'none'}}>{categoryss.name}</h1>
+        
+        {categoryss?.productHead?.map(subcategorys=>(
+            <>
+            <h1 style={{display:'none'}}>{subcategorys.name}</h1>
+                {subcategorys.product.map(pro=>(
+
+               
+        
+        <CSSTransition in={activeMenu=== categoryss.name } unmountOnExit timeout={500}
         classNames={styles.menuSecondary}>
         <div className={styles.manu}>
+        
         <DropdownItem leftIcon={<BackIcon />}
             goToMenu="main" />
-            <DropdownItem >My Settings</DropdownItem>
-            <DropdownItem >My Settings1</DropdownItem>
+            <DropdownItem > {pro.name} </DropdownItem>
+            {/* <DropdownItem >My Settings1</DropdownItem>
             <DropdownItem >My Settings2</DropdownItem>
             <DropdownItem >My Settings3</DropdownItem>
             <DropdownItem >My Settings4</DropdownItem>
-            <DropdownItem >My Settings5</DropdownItem>
+            <DropdownItem >My Settings5</DropdownItem> */}
         </div>
         </CSSTransition>
+        ))}
+        </>
+
+        ))}
+        </>
+        ))}
         <CSSTransition in={activeMenu==='registration'} unmountOnExit timeout={500}
         classNames={styles.menuSecondary}>
         <div className={styles.manu}>
@@ -164,6 +194,8 @@ function DropdownMenu(){
         </div>
         </CSSTransition>
         </div>
+        {/* ))} */}
+        </>
     )
 }
 
@@ -186,5 +218,6 @@ function NavItem(props){
         </li>
     );
 }
-
+}
 export default NavBar
+
